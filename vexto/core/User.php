@@ -22,10 +22,17 @@ class User {
         $errors = [];
         
         // Basic required fields
-        $required = ['nombre', 'apellido', 'email', 'password', 'cedula', 'genero', 'tipo_usuario'];
+        $required = ['nombre', 'apellido', 'email', 'password', 'tipo_usuario'];
         foreach ($required as $field) {
             if (empty($data[$field])) {
                 $errors[] = "El campo " . $field . " es obligatorio.";
+            }
+        }
+
+        // Profile photo is mandatory for normal users
+        if (!empty($data['tipo_usuario']) && $data['tipo_usuario'] !== 'compania') {
+            if (!isset($_FILES['foto_perfil']) || $_FILES['foto_perfil']['error'] !== 0) {
+                $errors[] = 'La foto de perfil es obligatoria para usuarios comunes.';
             }
         }
 
@@ -47,6 +54,10 @@ class User {
         // Validate Cedula (basic length check)
         if (!empty($data['cedula']) && strlen(preg_replace('/\D/', '', $data['cedula'])) < 11) {
             $errors[] = "La cédula debe tener al menos 11 dígitos.";
+        }
+
+        if (!empty($data['rnc']) && strlen(preg_replace('/\D/', '', $data['rnc'])) < 9) {
+            $errors[] = "El RNC debe tener al menos 9 dígitos.";
         }
         
         if (!empty($errors)) {
@@ -81,9 +92,9 @@ class User {
                 sanitize($data['email']),
                 $hashedPassword,
                 $data['tipo_usuario'],
-                sanitize($data['cedula']),
+                sanitize($data['cedula'] ?? ''),
                 $data['tipo_usuario'] === 'compania' ? sanitize($data['rnc'] ?? '') : null,
-                $data['genero'],
+                null,
                 $fotoPerfil,
                 $fotoPerfilTipo,
                 $maxProperties

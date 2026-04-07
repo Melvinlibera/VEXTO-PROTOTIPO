@@ -153,7 +153,7 @@ $properties = $stmt->fetchAll();
             <a href="<?php echo BASE_URL; ?>views/publish.php" class="nav-item"><i class="fas fa-plus-circle"></i> Publicar</a>
             <a href="<?php echo BASE_URL; ?>views/settings.php" class="nav-item"><i class="fas fa-user"></i> Perfil</a>
         </div>
-        <div class="nav-item" onclick="location.href='logout.php'">
+        <div class="nav-item" onclick="showLogoutConfirm('<?php echo BASE_URL; ?>views/logout.php')">
             <i class="fas fa-sign-out-alt"></i> Salir
         </div>
     </div>

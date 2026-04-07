@@ -139,6 +139,25 @@ function initInteractions() {
     });
 }
 
+let logoutUrl = null;
+function showLogoutConfirm(url) {
+    logoutUrl = url;
+    const modal = document.getElementById('logoutConfirmModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeLogoutConfirm() {
+    const modal = document.getElementById('logoutConfirmModal');
+    if (modal) modal.style.display = 'none';
+    logoutUrl = null;
+}
+
+function confirmLogout() {
+    if (logoutUrl) {
+        window.location.href = logoutUrl;
+    }
+}
+
 // ==================== MAPA ====================
 function initMap(lat = 18.4861, lng = -69.9312, elementId = 'map', editable = false) {
     if (!document.getElementById(elementId)) return;

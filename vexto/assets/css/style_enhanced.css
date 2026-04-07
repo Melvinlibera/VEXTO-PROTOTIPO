@@ -48,7 +48,52 @@
 }
 
 .modal-overlay {
-    background: rgba(0,0,0,0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+    padding: 20px;
+}
+
+.confirm-modal {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    width: min(420px, 100%);
+    padding: 28px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    animation: scaleIn 0.2s ease;
+}
+
+.confirm-modal-header h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+.confirm-modal-body {
+    color: var(--muted-text);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.confirm-modal-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.confirm-modal-actions .btn {
+    min-width: 140px;
 }
 
 /* Fallback global theme fixes para estilos inline con colores fijos */
@@ -870,3 +915,122 @@ input:focus, select:focus, textarea:focus {
 .scale-in {
     animation: scaleIn 0.4s ease;
 }
+
+/* --- Mejoras de Diseño y Verificación --- */
+
+/* Insignia de Verificación en Octágono */
+.verified-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    background: #0ea5e9;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.9rem;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    border: 2px solid var(--bg-color);
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+    z-index: 10;
+    transition: var(--transition);
+}
+
+.verified-badge.small {
+    width: 20px;
+    height: 20px;
+    font-size: 0.6rem;
+    border-width: 1px;
+}
+
+.verified-badge:hover {
+    transform: scale(1.1) rotate(5deg);
+    background: #0284c7;
+}
+
+/* Contenedores y Secciones */
+.info-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    transition: var(--transition-smooth);
+}
+
+.info-section:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.actions-sidebar .filter-card {
+    border-radius: 24px;
+    padding: 30px;
+}
+
+/* Avatares y Perfil */
+.profile-avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.seller-avatar-mini {
+    background: var(--avatar-bg);
+    color: var(--avatar-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+}
+
+.seller-avatar-mini img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tabs de Perfil */
+.profile-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.tab {
+    padding: 15px 25px;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--muted-text);
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.tab.active {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.tab:hover:not(.active) {
+    color: var(--text-color);
+    background: var(--secondary-bg);
+    border-radius: 12px 12px 0 0;
+}
+
+/* Badges */
+.badge-pill.company {
+    background: #6366f1;
+    color: white;
+}
+
+/* Utilidades de espaciado y alineación */
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.flex-center { display: flex; align-items: center; gap: 10px; }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }

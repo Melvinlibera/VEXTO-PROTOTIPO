@@ -14,6 +14,7 @@ window.onload = () => {
         delay: 800,
         complete: () => {
             document.getElementById('splash').style.display = 'none';
+            toggleAccountType();
             anime({
                 targets: '#auth-container',
                 opacity: [0, 1],
@@ -49,18 +50,30 @@ function switchForm(type) {
     }
 }
 
-function toggleRNC() {
-    const tipoUsuario = document.getElementById('tipoUsuario').value;
-    const rncField = document.getElementById('rncField');
+function toggleAccountType() {
+    const tipoUsuario = document.getElementById('tipoUsuario')?.value;
+    const fotoPerfil = document.getElementById('fotoPerfil');
+    const fotoPerfilHint = document.getElementById('fotoPerfilHint');
+
+    if (!fotoPerfil || !fotoPerfilHint) return;
+
     if (tipoUsuario === 'compania') {
-        rncField.style.display = 'block';
-        anime({
-            targets: '#rncField',
-            opacity: [0, 1],
-            duration: 300,
-            easing: 'easeOutQuad'
-        });
+        fotoPerfil.required = false;
+        fotoPerfilHint.textContent = 'Foto opcional para empresas.';
     } else {
-        rncField.style.display = 'none';
+        fotoPerfil.required = true;
+        fotoPerfilHint.textContent = 'Foto opcional para usuarios comunes.';
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fotoPerfil = document.getElementById('fotoPerfil');
+    const fotoPerfilStatus = document.getElementById('fotoPerfilStatus');
+
+    if (fotoPerfil && fotoPerfilStatus) {
+        fotoPerfil.addEventListener('change', function() {
+            const fileName = this.files && this.files.length ? this.files[0].name : 'Ningún archivo seleccionado';
+            fotoPerfilStatus.textContent = fileName;
+        });
+    }
+});

@@ -56,19 +56,34 @@ if ($user_id) {
         
         <?php if ($user): ?>
             <a href="<?php echo BASE_URL; ?>views/publish.php"><i class="fas fa-plus-circle"></i> Publicar</a>
-            <a href="<?php echo BASE_URL; ?>views/my_publications.php"><i class="fas fa-list"></i> Mis Anuncios</a>
+            <a href="<?php echo BASE_URL; ?>views/my_publications.php"><i class="fas fa-list"></i> Mis Publicaciones</a>
             <a href="<?php echo BASE_URL; ?>views/messages.php"><i class="fas fa-comments"></i> Mensajes<?php if ($unreadCount > 0): ?> <span style="display:inline-block; margin-left:6px; font-size:0.8rem; background: var(--accent-color); color:#fff; padding:2px 8px; border-radius:999px; font-weight:700;"><?php echo $unreadCount; ?></span><?php endif; ?></a>
             <a href="<?php echo BASE_URL; ?>views/favorites.php"><i class="fas fa-heart"></i> Favoritos</a>
             <a href="<?php echo BASE_URL; ?>views/settings.php"><i class="fas fa-user-circle"></i> Perfil</a>
             <?php if ($user['tipo_usuario'] == 'compania'): ?>
                 <a href="<?php echo BASE_URL; ?>views/stats.php"><i class="fas fa-chart-line"></i> Panel</a>
             <?php endif; ?>
-            <a href="<?php echo BASE_URL; ?>views/logout.php" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="<?php echo BASE_URL; ?>views/logout.php" title="Cerrar Sesión" onclick="showLogoutConfirm(this.href); return false;"><i class="fas fa-sign-out-alt"></i></a>
         <?php else: ?>
             <a href="index.php">Iniciar Sesión</a>
             <a href="index.php?register=1" class="btn btn-primary" style="padding: 8px 15px;">Registrarse</a>
         <?php endif; ?>
     </div>
 </header>
+
+<div id="logoutConfirmModal" class="modal-overlay" style="display:none;">
+    <div class="confirm-modal">
+        <div class="confirm-modal-header">
+            <h3>¿Seguro que quieres salir?</h3>
+        </div>
+        <div class="confirm-modal-body">
+            Al cerrar sesión, tendrás que iniciar sesión de nuevo para continuar.
+        </div>
+        <div class="confirm-modal-actions">
+            <button type="button" class="btn btn-outline" onclick="closeLogoutConfirm()">No, quedarme</button>
+            <button type="button" class="btn btn-primary" onclick="confirmLogout()">Sí, salir</button>
+        </div>
+    </div>
+</div>
 
 <script src="<?php echo ASSETS_URL; ?>js/main_enhanced.js"></script>

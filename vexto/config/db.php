@@ -58,6 +58,11 @@ try {
         if (!$stmt || !$stmt->fetch()) {
             $pdo->exec("ALTER TABLE users ADD COLUMN email_change_count TINYINT(1) NOT NULL DEFAULT 0 AFTER email");
         }
+
+        $stmt = $pdo->query("SHOW COLUMNS FROM users LIKE 'verified'");
+        if (!$stmt || !$stmt->fetch()) {
+            $pdo->exec("ALTER TABLE users ADD COLUMN verified TINYINT(1) NOT NULL DEFAULT 0 AFTER email_change_count");
+        }
     } catch (Exception $e) {
         // Silently ignore if table doesn't exist yet
     }

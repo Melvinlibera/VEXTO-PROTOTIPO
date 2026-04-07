@@ -58,61 +58,45 @@ if (isLoggedIn()) {
                 <h1>Únete a <?php echo APP_NAME; ?></h1>
                 <p>Crea tu perfil de usuario o compañía</p>
             </div>
-            <form action="auth.php" method="POST" enctype="multipart/form-data" id="register-form">
-                <input type="hidden" name="action" value="register">
-                <div class="grid-2">
-                    <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" name="nombre" required>
+            <div class="form-container">
+                <form action="auth.php" method="POST" enctype="multipart/form-data" id="register-form">
+                    <input type="hidden" name="action" value="register">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido</label>
+                            <input type="text" name="apellido" required>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Tipo de Cuenta</label>
+                            <select name="tipo_usuario" id="tipoUsuario" required onchange="toggleAccountType()">
+                                <option value="usuario">Usuario Común</option>
+                                <option value="compania">Compañía / Empresa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Foto de Perfil</label>
+                            <input type="file" id="fotoPerfil" name="foto_perfil" accept="image/*">
+                            <small id="fotoPerfilStatus">Ningún archivo seleccionado</small>
+                            <small id="fotoPerfilHint">Foto opcional para usuarios comunes.</small>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Apellido</label>
-                        <input type="text" name="apellido" required>
-                    </div>
-                </div>
-                <div class="grid-2">
-                    <div class="form-group">
-                        <label>Género</label>
-                        <select name="genero" required>
-                            <option value="">Selecciona tu género</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Otro">Otro</option>
-                        </select>
+                        <label>Correo Electrónico</label>
+                        <input type="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label>Cédula</label>
-                        <input type="text" name="cedula" required>
+                        <label>Contraseña</label>
+                        <input type="password" name="password" required>
                     </div>
-                </div>
-                <div class="grid-2">
-                    <div class="form-group">
-                        <label>Tipo de Cuenta</label>
-                        <select name="tipo_usuario" id="tipoUsuario" required onchange="toggleRNC()">
-                            <option value="usuario">Usuario Común</option>
-                            <option value="compania">Compañía / Empresa</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="rncField" style="display: none;">
-                        <label>RNC (Registro Nacional de Contribuyente)</label>
-                        <input type="text" name="rnc">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Foto de Perfil</label>
-                    <input type="file" name="foto_perfil" accept="image/*" required>
-                    <small>Sube una foto de perfil (JPG, PNG, etc.)</small>
-                </div>
-                <div class="form-group">
-                    <label>Correo Electrónico</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" name="password" required>
-                </div>
-                <button type="submit" class="btn-primary">Crear Cuenta</button>
-            </form>
+                    <button type="submit" class="btn-primary">Crear Cuenta</button>
+                </form>
+            </div>
             <div class="toggle-auth">
                 ¿Ya tienes cuenta? <span onclick="switchForm('login')">Inicia sesión</span>
             </div>
